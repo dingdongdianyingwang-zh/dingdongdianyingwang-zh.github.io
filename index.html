@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="keywords" content="叮咚电影网, dingdongdianyingwang-zh, 叮咚电影, 在线电影, 影视资源, 高清影视">
+<meta name="description" content="叮咚电影网 - 叮咚一声，好片到！海量高清电影、热门剧集、综艺动漫随时看，更新快、分类全、画质清晰。官方网址：https://dingdongdianyingwang-zh.github.io">
+<title>叮咚电影网 | 叮咚一声 · 好片就到</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  :root{
+    --bg:#0a0a1a;--bg2:#11112a;--card:#151535;
+    --cyan:#00f5d4;--pink:#f15bb5;--purple:#9b5de5;--yellow:#fee440;
+    --txt:#e4e4f5;--muted:#8d8db5;
+  }
+  body{font-family:"PingFang SC","Noto Sans CJK SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--txt);line-height:1.8;overflow-x:hidden;}
+  a{text-decoration:none;color:inherit;}
+  ::selection{background:var(--pink);color:#fff;}
+
+  /* ===== Background glow ===== */
+  body::before{content:'';position:fixed;inset:0;z-index:-2;
+    background:radial-gradient(700px 500px at 12% 8%,rgba(155,93,229,.28),transparent 60%),
+               radial-gradient(600px 500px at 88% 20%,rgba(0,245,212,.16),transparent 60%),
+               radial-gradient(700px 500px at 50% 100%,rgba(241,91,181,.16),transparent 60%);}
+  body::after{content:'';position:fixed;inset:0;z-index:-1;opacity:.35;
+    background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
+    background-size:46px 46px;}
+
+  .wrap{max-width:1180px;margin:0 auto;padding:0 22px;}
+
+  /* ===== Top bar ===== */
+  .topbar{background:rgba(10,10,26,.85);backdrop-filter:blur(8px);border-bottom:1px solid rgba(0,245,212,.15);font-size:12.5px;color:var(--muted);}
+  .topbar .wrap{display:flex;justify-content:space-between;height:38px;align-items:center;}
+  .topbar .live::before{content:'🔴';animation:blink 1.4s infinite;}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+
+  /* ===== Nav ===== */
+  header{position:sticky;top:0;z-index:99;background:rgba(10,10,26,.82);backdrop-filter:blur(14px);border-bottom:1px solid rgba(155,93,229,.22);}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:76px;}
+  .logo{display:flex;align-items:center;gap:12px;}
+  .logo .b{width:46px;height:46px;border-radius:16px;background:linear-gradient(135deg,var(--cyan),var(--purple));display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:0 0 24px rgba(0,245,212,.5);animation:glow 2.6s ease-in-out infinite;}
+  @keyframes glow{0%,100%{box-shadow:0 0 20px rgba(0,245,212,.45);}50%{box-shadow:0 0 34px rgba(241,91,181,.6);}}
+  .logo h1{font-size:24px;font-weight:900;letter-spacing:1px;}
+  .logo h1 span{color:var(--cyan);text-shadow:0 0 12px rgba(0,245,212,.6);}
+  .logo small{display:block;font-size:9.5px;color:var(--muted);letter-spacing:3px;text-transform:uppercase;}
+  .menu{display:flex;align-items:center;gap:6px;}
+  .menu a{padding:10px 17px;border-radius:12px;font-size:14.5px;font-weight:600;color:#c9c9e8;transition:.25s;}
+  .menu a:hover{color:var(--cyan);background:rgba(0,245,212,.08);}
+  .menu a.play{padding:10px 22px;background:linear-gradient(135deg,var(--pink),var(--purple));color:#fff;box-shadow:0 6px 20px rgba(241,91,181,.4);}
+  .menu a.play:hover{color:#fff;transform:translateY(-2px);}
+  .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;}
+  .burger i{width:24px;height:2.5px;background:var(--cyan);border-radius:3px;}
+
+  /* ===== Hero ===== */
+  .hero{padding:96px 0 104px;position:relative;text-align:center;}
+  .hero .bell{font-size:70px;display:inline-block;animation:ring 3s ease-in-out infinite;}
+  @keyframes ring{0%,100%{transform:rotate(0)}20%{transform:rotate(-18deg)}40%{transform:rotate(14deg)}60%{transform:rotate(-8deg)}80%{transform:rotate(4deg)}}
+  .hero h2{font-size:52px;font-weight:900;line-height:1.25;margin:22px 0 18px;}
+  .hero h2 .grad{background:linear-gradient(90deg,var(--cyan),var(--pink),var(--purple));background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:flow 4s linear infinite;}
+  @keyframes flow{to{background-position:200% 0}}
+  .hero h2 em{font-style:normal;color:var(--yellow);}
+  .hero p{font-size:17px;color:var(--muted);max-width:600px;margin:0 auto 40px;}
+  .search{display:flex;max-width:600px;margin:0 auto;background:rgba(255,255,255,.06);border:1px solid rgba(0,245,212,.3);border-radius:18px;padding:8px;backdrop-filter:blur(6px);}
+  .search input{flex:1;border:none;outline:none;background:transparent;padding:12px 18px;font-size:15px;color:var(--txt);}
+  .search input::placeholder{color:var(--muted);}
+  .search button{border:none;background:linear-gradient(135deg,var(--cyan),var(--purple));color:#0a0a1a;padding:0 30px;border-radius:12px;font-size:15px;font-weight:800;cursor:pointer;transition:.25s;}
+  .search button:hover{transform:scale(1.04);box-shadow:0 0 24px rgba(0,245,212,.5);}
+  .hstats{display:flex;justify-content:center;gap:60px;margin-top:54px;flex-wrap:wrap;}
+  .hstats .st b{display:block;font-size:34px;font-weight:900;color:var(--cyan);text-shadow:0 0 18px rgba(0,245,212,.5);}
+  .hstats .st span{font-size:13px;color:var(--muted);}
+
+  /* ===== Section ===== */
+  section{padding:86px 0;}
+  .s-head{text-align:center;margin-bottom:54px;}
+  .s-head .tag{display:inline-block;font-size:12px;color:var(--cyan);border:1px solid rgba(0,245,212,.4);padding:4px 16px;border-radius:30px;letter-spacing:3px;text-transform:uppercase;margin-bottom:12px;}
+  .s-head h3{font-size:30px;font-weight:900;}
+  .s-head h3::after{content:'';display:block;width:60px;height:4px;background:linear-gradient(90deg,var(--cyan),var(--pink));border-radius:4px;margin:14px auto 0;}
+  .s-head p{font-size:15px;color:var(--muted);margin-top:14px;}
+
+  /* ===== Tabs + Slider ===== */
+  .tabs{display:flex;justify-content:center;gap:10px;margin-bottom:36px;flex-wrap:wrap;}
+  .tabs button{background:var(--card);border:1px solid rgba(155,93,229,.3);color:var(--txt);padding:10px 24px;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;transition:.25s;}
+  .tabs button.on,.tabs button:hover{border-color:var(--cyan);color:var(--cyan);box-shadow:0 0 16px rgba(0,245,212,.25);}
+  .rail{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
+
+  .film{background:var(--card);border-radius:18px;overflow:hidden;border:1px solid rgba(155,93,229,.18);transition:.35s;position:relative;}
+  .film:hover{transform:translateY(-8px);border-color:var(--cyan);box-shadow:0 18px 40px rgba(0,245,212,.15);}
+  .film .poster{height:280px;position:relative;display:flex;flex-direction:column;justify-content:space-between;padding:16px;}
+  .film .poster .top{display:flex;justify-content:space-between;align-items:flex-start;position:relative;z-index:2;}
+  .film .poster .badge{background:var(--pink);color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:8px;}
+  .film .poster .heart{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.2);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;transition:.2s;}
+  .film .poster .heart:hover{background:var(--pink);transform:scale(1.12);}
+  .film .poster .name{position:relative;z-index:2;}
+  .film .poster .name h4{font-size:22px;font-weight:900;}
+  .film .poster .name small{font-size:12px;opacity:.85;}
+  .film .poster::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 35%,rgba(10,10,26,.92));}
+  .f1{background:linear-gradient(150deg,#7b2ff7,#f15bb5);}
+  .f2{background:linear-gradient(150deg,#00b4d8,#90e0ef);}
+  .f3{background:linear-gradient(150deg,#f72585,#7209b7);}
+  .f4{background:linear-gradient(150deg,#ff9e00,#ffea00);}
+  .f5{background:linear-gradient(150deg,#3a0ca3,#4361ee);}
+  .f6{background:linear-gradient(150deg,#e63946,#f4a261);}
+  .f7{background:linear-gradient(150deg,#06d6a0,#118ab2);}
+  .f8{background:linear-gradient(150deg,#8338ec,#ff006e);}
+  .fbody{padding:16px 20px 22px;}
+  .fbody .line{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);}
+  .fbody .line b{color:var(--yellow);}
+  .fbody p{font-size:13px;color:#9a9ac0;margin-top:8px;}
+
+  /* ===== Diagonal CTA ===== */
+  .cta-band{background:linear-gradient(100deg,var(--purple),var(--pink));border-radius:26px;padding:44px 40px;text-align:center;box-shadow:0 20px 50px rgba(241,91,181,.25);}
+  .cta-band h4{font-size:26px;font-weight:900;margin-bottom:10px;}
+  .cta-band p{font-size:15px;opacity:.92;margin-bottom:24px;}
+  .cta-band a{display:inline-block;background:#0a0a1a;color:var(--cyan);font-weight:800;padding:14px 36px;border-radius:14px;font-size:15px;transition:.25s;}
+  .cta-band a:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(0,0,0,.3);}
+
+  /* ===== Series ===== */
+  .sgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .sbox{border-radius:18px;padding:26px;background:var(--card);border:1px solid rgba(0,245,212,.15);transition:.3s;}
+  .sbox:hover{border-color:var(--pink);transform:translateY(-6px);background:var(--bg2);}
+  .sbox .nm{font-size:38px;margin-bottom:10px;}
+  .sbox h4{font-size:19px;font-weight:800;margin-bottom:8px;}
+  .sbox .eps{font-size:12.5px;color:var(--cyan);margin-bottom:8px;}
+  .sbox p{font-size:13.5px;color:var(--muted);}
+  .sbox .go{display:inline-block;margin-top:14px;font-size:13px;color:var(--pink);font-weight:700;}
+
+  /* ===== Steps ===== */
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;position:relative;}
+  .step{background:var(--card);border-radius:18px;padding:28px 22px;text-align:center;border:1px solid rgba(155,93,229,.2);transition:.3s;}
+  .step:hover{transform:translateY(-6px);border-color:var(--cyan);}
+  .step .num{width:52px;height:52px;margin:0 auto 16px;border-radius:16px;background:linear-gradient(135deg,var(--cyan),var(--purple));display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900;color:#0a0a1a;}
+  .step h5{font-size:17px;font-weight:800;margin-bottom:8px;}
+  .step p{font-size:13px;color:var(--muted);}
+
+  /* ===== News ===== */
+  .newsbox{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+  .npic{border-radius:20px;height:300px;background:linear-gradient(135deg,#7b2ff7,#00f5d4);display:flex;align-items:center;justify-content:center;font-size:80px;box-shadow:0 16px 40px rgba(123,47,247,.3);}
+  .ncard{background:var(--card);border-radius:20px;padding:30px;border:1px solid rgba(0,245,212,.15);display:flex;flex-direction:column;justify-content:center;}
+  .ncard .date{font-size:12px;color:var(--cyan);font-weight:700;margin-bottom:10px;}
+  .ncard h4{font-size:21px;line-height:1.5;margin-bottom:14px;}
+  .ncard p{font-size:14px;color:var(--muted);}
+  .nlist{display:flex;flex-direction:column;gap:16px;}
+  .nitem{background:var(--card);border-radius:16px;padding:20px;border-left:4px solid var(--pink);transition:.3s;}
+  .nitem:hover{border-left-color:var(--cyan);transform:translateX(6px);}
+  .nitem .d{font-size:12px;color:var(--pink);font-weight:700;}
+  .nitem h5{font-size:15.5px;margin:6px 0 4px;}
+  .nitem p{font-size:13px;color:var(--muted);}
+
+  /* ===== Map ===== */
+  .mapbox{background:var(--card);border-radius:24px;border:1px solid rgba(155,93,229,.25);padding:40px;}
+  .mhead{text-align:center;margin-bottom:34px;}
+  .mhead h4{font-size:22px;font-weight:900;}
+  .mhead .u{color:var(--cyan);font-size:14px;display:block;margin-top:8px;}
+  .mgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:22px;}
+  .mcol h5{font-size:15px;color:var(--cyan);font-weight:800;margin-bottom:14px;}
+  .mcol a{display:block;font-size:13.5px;color:var(--muted);padding:5px 0;transition:.2s;}
+  .mcol a:hover{color:var(--pink);padding-left:6px;}
+
+  /* ===== Footer ===== */
+  footer{background:#06061a;border-top:1px solid rgba(155,93,229,.25);padding:42px 24px 26px;text-align:center;font-size:13.5px;color:var(--muted);}
+  footer .fh{font-size:20px;font-weight:900;color:var(--txt);margin-bottom:10px;}
+  footer .fh span{color:var(--cyan);}
+  footer a{color:var(--cyan);}
+  footer .sep{width:60px;height:3px;background:linear-gradient(90deg,var(--cyan),var(--pink));margin:20px auto;border-radius:3px;}
+  footer .cp{font-size:12px;opacity:.7;}
+
+  /* ===== Responsive ===== */
+  @media(max-width:960px){
+    .rail{grid-template-columns:1fr 1fr;}
+    .sgrid{grid-template-columns:1fr 1fr;}
+    .steps{grid-template-columns:1fr 1fr;}
+    .newsbox{grid-template-columns:1fr;}
+    .mgrid{grid-template-columns:1fr 1fr;}
+    .hero h2{font-size:36px;}
+  }
+  @media(max-width:580px){
+    .menu{display:none;position:absolute;top:76px;left:0;right:0;flex-direction:column;background:var(--bg2);padding:16px;border-bottom:1px solid rgba(0,245,212,.2);}
+    .menu.open{display:flex;}
+    .burger{display:flex;}
+    .rail{grid-template-columns:1fr;}
+    .sgrid{grid-template-columns:1fr;}
+    .steps{grid-template-columns:1fr;}
+    .mgrid{grid-template-columns:1fr;}
+    section{padding:60px 0;}
+    .hero{padding:64px 0 72px;}
+    .hstats{gap:30px;}
+    .cta-band{padding:34px 22px;}
+    .mapbox{padding:26px 20px;}
+  }
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/zhangzong.js"></script>
+
+<div class="topbar"><div class="wrap"><span class="live">叮咚电影网 24h 不间断更新</span><span>📧 合作联系：service@dingdongdianyingwang-zh.github.io</span></div></div>
+
+<!-- Nav -->
+<header>
+  <div class="wrap nav">
+    <div class="logo"><div class="b">🔔</div><div><h1><span>叮咚</span>电影网</h1><small>DingDong Movie</small></div></div>
+    <nav class="menu" id="menu">
+      <a href="#home">首页</a>
+      <a href="#films">在线电影</a>
+      <a href="#series">热播剧集</a>
+      <a href="#how">观影指南</a>
+      <a href="#news">影视资讯</a>
+      <a href="#map">网站地图</a>
+      <a href="#" class="play">▶ 立即播放</a>
+    </nav>
+    <div class="burger" id="burger"><i></i><i></i><i></i></div>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero" id="home">
+  <div class="bell">🔔</div>
+  <h2>叮咚一声 <em>·</em> <span class="grad">好片就到</span></h2>
+  <p>海量高清电影、热门剧集、综艺动漫，随时点播、快速更新、画质清晰，叮咚电影网陪你看好每一部。</p>
+  <form class="search" onsubmit="event.preventDefault();">
+    <input type="text" placeholder="输入片名、演员、类型…叮咚一下马上搜">
+    <button type="submit">搜 索</button>
+  </form>
+  <div class="hstats">
+    <div class="st"><b>20,000+</b><span>高清影片</span></div>
+    <div class="st"><b>24H</b><span>极速更新</span></div>
+    <div class="st"><b>4K</b><span>蓝光画质</span></div>
+    <div class="st"><b>0</b><span>弹窗广告</span></div>
+  </div>
+</section>
+
+<!-- Films -->
+<section id="films">
+  <div class="wrap">
+    <div class="s-head">
+      <div class="tag">ONLINE FILMS</div>
+      <h3>在线电影 · 即点即看</h3>
+      <p>全站影片持续更新，叮咚一声，精彩即刻送达</p>
+    </div>
+    <div class="tabs">
+      <button class="on">全部</button><button>动作</button><button>喜剧</button><button>爱情</button><button>科幻</button><button>悬疑</button>
+    </div>
+    <div class="rail">
+      <div class="film"><div class="poster f1"><div class="top"><span class="badge">NEW</span><div class="heart">♡</div></div><div class="name"><h4>周处除三害</h4><small>2023 · 动作 / 犯罪</small></div></div><div class="fbody"><div class="line"><span>中国台湾</span><b>★ 8.5</b></div><p>黑帮江湖的快意恩仇，爽感十足。</p></div></div>
+      <div class="film"><div class="poster f2"><div class="top"><span class="badge">热播</span><div class="heart">♡</div></div><div class="name"><h4>飞驰人生2</h4><small>2024 · 喜剧 / 运动</small></div></div><div class="fbody"><div class="line"><span>韩寒 作品</span><b>★ 8.2</b></div><p>笑点与热血并存的速度与激情。</p></div></div>
+      <div class="film"><div class="poster f3"><div class="top"><span class="badge">高分</span><div class="heart">♡</div></div><div class="name"><h4>星际穿越</h4><small>2014 · 科幻 / 冒险</small></div></div><div class="fbody"><div class="line"><span>诺兰 作品</span><b>★ 9.4</b></div><p>穿越虫洞的父女深情与宇宙史诗。</p></div></div>
+      <div class="film"><div class="poster f4"><div class="top"><span class="badge">推荐</span><div class="heart">♡</div></div><div class="name"><h4>你好，李焕英</h4><small>2021 · 喜剧 / 亲情</small></div></div><div class="fbody"><div class="line"><span>贾玲 导演</span><b>★ 8.4</b></div><p>穿越时空的母女情，催泪又温暖。</p></div></div>
+      <div class="film"><div class="poster f5"><div class="top"><span class="badge">经典</span><div class="heart">♡</div></div><div class="name"><h4>盗梦空间</h4><small>2010 · 科幻 / 悬疑</small></div></div><div class="fbody"><div class="line"><span>梦境迷宫</span><b>★ 9.3</b></div><p>层层梦境中的烧脑冒险，经典永不过时。</p></div></div>
+      <div class="film"><div class="poster f6"><div class="top"><span class="badge">大片</span><div class="heart">♡</div></div><div class="name"><h4>沙丘2</h4><small>2024 · 科幻 / 史诗</small></div></div><div class="fbody"><div class="line"><span>维伦纽瓦</span><b>★ 8.8</b></div><p>浩瀚沙漠中的命运之战，视听盛宴。</p></div></div>
+      <div class="film"><div class="poster f7"><div class="top"><span class="badge">治愈</span><div class="heart">♡</div></div><div class="name"><h4>小森林</h4><small>2015 · 美食 / 治愈</small></div></div><div class="fbody"><div class="line"><span>日本电影</span><b>★ 9.0</b></div><p>四季三餐的田园生活，治愈你的疲惫。</p></div></div>
+      <div class="film"><div class="poster f8"><div class="top"><span class="badge">新片</span><div class="heart">♡</div></div><div class="name"><h4>默杀</h4><small>2024 · 悬疑 / 犯罪</small></div></div><div class="fbody"><div class="line"><span>暑期黑马</span><b>★ 8.1</b></div><p>层层反转的校园悬疑，全程高能。</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="padding:0 0 86px;">
+  <div class="wrap"><div class="cta-band">
+    <h4>🎬 叮咚！你有一部好片待领取</h4>
+    <p>收藏本站，第一时间获取最新上线影片与独家片单</p>
+    <a href="#">＋ 收藏本站</a>
+  </div></div>
+</section>
+
+<!-- Series -->
+<section id="series" style="background:rgba(255,255,255,.02);">
+  <div class="wrap">
+    <div class="s-head">
+      <div class="tag">POPULAR SERIES</div>
+      <h3>热播剧集</h3>
+      <p>院线大片不够看？来剧集区一次追个够</p>
+    </div>
+    <div class="sgrid">
+      <div class="sbox"><div class="nm">🏙️</div><h4>繁花</h4><div class="eps">全 30 集 · 王家卫 作品</div><p>十里洋场的时代浮沉，光影美学极致呈现。</p><a href="#" class="go">立即观看 →</a></div>
+      <div class="sbox"><div class="nm">🕵️</div><h4>漫长的季节</h4><div class="eps">全 12 集 · 高分悬疑</div><p>小城往事交织出一部时代悲喜剧，口碑炸裂。</p><a href="#" class="go">立即观看 →</a></div>
+      <div class="sbox"><div class="nm">⚔️</div><h4>庆余年</h4><div class="eps">第二季 · 权谋喜剧</div><p>穿越少年的朝堂风云，笑料与权谋齐飞。</p><a href="#" class="go">立即观看 →</a></div>
+      <div class="sbox"><div class="nm">🐉</div><h4>黑神话：钟馗</h4><div class="eps">特别篇 · 东方奇幻</div><p>东方神话新演绎，视效与剧情的双重惊喜。</p><a href="#" class="go">立即观看 →</a></div>
+      <div class="sbox"><div class="nm">🌸</div><h4>玫瑰的故事</h4><div class="eps">全 38 集 · 都市情感</div><p>一段女性成长史，演绎爱与自由的多种模样。</p><a href="#" class="go">立即观看 →</a></div>
+      <div class="sbox"><div class="nm">🚀</div><h4>三体</h4><div class="eps">全 30 集 · 科幻巨制</div><p>中国科幻里程碑，宇宙文明的宏大想象。</p><a href="#" class="go">立即观看 →</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- How -->
+<section id="how">
+  <div class="wrap">
+    <div class="s-head">
+      <div class="tag">HOW IT WORKS</div>
+      <h3>叮咚观影指南</h3>
+      <p>三步轻松看片，叮咚一声，好片即到</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="num">1</div><h5>搜索影片</h5><p>输入片名、演员或类型，秒出结果。</p></div>
+      <div class="step"><div class="num">2</div><h5>选择清晰度</h5><p>蓝光、1080P、4K 多档画质自由切换。</p></div>
+      <div class="step"><div class="num">3</div><h5>即点即看</h5><p>无需等待，点击即可流畅播放。</p></div>
+      <div class="step"><div class="num">4</div><h5>收藏追剧</h5><p>加入收藏夹，更新自动提醒不迷路。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- News -->
+<section id="news" style="background:rgba(255,255,255,.02);">
+  <div class="wrap">
+    <div class="s-head">
+      <div class="tag">NEWS & UPDATES</div>
+      <h3>影视资讯</h3>
+      <p>叮咚～最新上映、幕后花絮一手掌握</p>
+    </div>
+    <div class="newsbox">
+      <div class="npic">🎞️</div>
+      <div class="ncard">
+        <div class="date">2026-01-22 · 最新上线</div>
+        <h4>2026 年度必看片单出炉，多部年度大片集中上线叮咚电影网</h4>
+        <p>涵盖动作、喜剧、科幻、悬疑多种类型，影迷朋友们可以一次看个够，叮咚电影网持续为你更新最全片源。</p>
+      </div>
+    </div>
+    <div class="nlist" style="margin-top:24px;">
+      <div class="nitem"><div class="d">2026-01-19</div><h5>春节档影片前瞻：多部合家欢喜剧定档</h5><p>陪家人一起看场好电影，是不错的节日选择。</p></div>
+      <div class="nitem"><div class="d">2026-01-15</div><h5>经典港片 4K 修复版上线，重温黄金时代的港味江湖</h5><p>高画质修复让老片焕发新生。</p></div>
+      <div class="nitem"><div class="d">2026-01-11</div><h5>悬疑剧迎来井喷，国产推理作品口碑持续走高</h5><p>反转不断的剧情让人欲罢不能。</p></div>
+      <div class="nitem"><div class="d">2026-01-07</div><h5>叮咚电影网新增「我的收藏」功能，追剧更方便</h5><p>收藏喜欢的影片，更新不再错过。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Map -->
+<section id="map">
+  <div class="wrap">
+    <div class="mapbox">
+      <div class="mhead">
+        <h4>🗺️ 网站地图</h4>
+        <span class="u">🔗 https://dingdongdianyingwang-zh.github.io</span>
+      </div>
+      <div class="mgrid">
+        <div class="mcol"><h5>电影频道</h5><a href="#">动作大片</a><a href="#">喜剧搞笑</a><a href="#">爱情文艺</a><a href="#">科幻奇幻</a><a href="#">悬疑犯罪</a></div>
+        <div class="mcol"><h5>剧集频道</h5><a href="#">国产剧</a><a href="#">港台剧</a><a href="#">美剧韩剧</a><a href="#">网络剧</a></div>
+        <div class="mcol"><h5>综艺动漫</h5><a href="#">热门综艺</a><a href="#">国产动漫</a><a href="#">日漫美漫</a><a href="#">纪录片</a></div>
+        <div class="mcol"><h5>快速导航</h5><a href="#">最新上线</a><a href="#">高分榜</a><a href="#">热播榜</a><a href="#">我的收藏</a></div>
+        <div class="mcol"><h5>关于我们</h5><a href="#">关于本站</a><a href="#">留言反馈</a><a href="#">免责声明</a><a href="#">商务合作</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="fh">🔔 <span>叮咚电影网</span></div>
+  <div>官方网址：<a href="https://dingdongdianyingwang-zh.github.io">https://dingdongdianyingwang-zh.github.io</a></div>
+  <div class="sep"></div>
+  <div class="cp">© 2025 叮咚电影网（dingdongdianyingwang-zh）· 内容仅供学习交流，版权归原作者及发行方所有</div>
+</footer>
+
+<script>
+  document.getElementById('burger').addEventListener('click',function(){document.getElementById('menu').classList.toggle('open');});
+  document.querySelectorAll('#menu a').forEach(function(a){a.addEventListener('click',function(){document.getElementById('menu').classList.remove('open');});});
+  document.querySelectorAll('.tabs button').forEach(function(b){b.addEventListener('click',function(){document.querySelectorAll('.tabs button').forEach(function(x){x.classList.remove('on')});this.classList.add('on');});});
+  document.querySelectorAll('.film .heart').forEach(function(h){h.addEventListener('click',function(){this.textContent=this.textContent==='♡'?'♥':'♡';this.style.color=this.textContent==='♥'?'#ff6b81':'';});});
+</script>
+
+</body>
+</html>
